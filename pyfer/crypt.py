@@ -163,7 +163,7 @@ class Machine:
                 for i in self.key[(3 * square) : (4 * square)]:
                     key_y2_elements.append(int(i))
                     y2_key = np.argsort(np.array(key_y2_elements))
-                    
+
                 key_z_elements = []
                 for i in self.key[(-1 * square) :]:
                     key_z_elements.append(int(i))
@@ -196,7 +196,7 @@ class Machine:
             ).transpose()
         reshuffle_7 = reshuffle_6.reshape(square, square)
         reshuffle_8 = reshuffle_7[y2_key, :]
-        
+
         reshuffle_9 = reshuffle_8[:, z_key]
         if len(self.key) == 40:
             reshuffle_10 = reshuffle_9.reshape(
@@ -207,7 +207,7 @@ class Machine:
                 3, int((square ** 2) / 3)
             ).transpose()
         reshuffle_11 = reshuffle_10.reshape(square, square)
-        reshuffle_12 = reshuffle_11[z_key, :]        
+        reshuffle_12 = reshuffle_11[z_key, :]
 
         self.scramble_grid = reshuffle_12
 
