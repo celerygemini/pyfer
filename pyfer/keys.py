@@ -27,7 +27,7 @@ def generate_key(key_length):
         )
 
     str_key = "".join(
-        ["{}".format(np.random.randint(0, 9)) for num in range(0, n)]
+        ["{}".format(np.random.randint(10)) for num in range(0, n)]
     )
 
     return str_key

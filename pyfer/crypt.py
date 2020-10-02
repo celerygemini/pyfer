@@ -29,7 +29,7 @@ class Machine:
 
     Attributes
     ----------
-    key (str): string of 24, 32, or 36 digits to serving as encryption
+    key (str): string of 30, 40, or 45 digits to serving as encryption
     key.
     -
     char_list (list) optional/dependent on init: list of characters used
@@ -59,7 +59,7 @@ class Machine:
         machine.
 
         Arguments:
-            key (str): string of 24, 32, or 36 digits to serving as
+            key (str): string of 30, 40, or 45 digits to serving as
             encryption key.
 
         Returns:
@@ -97,7 +97,7 @@ class Machine:
         else:
             raise Exception(f"key must be a string; {type(key)} given.")
 
-        if len(key) == 24:
+        if len(key) == 30:
             self.key = key
             self.char_list = [
                 x
@@ -106,7 +106,7 @@ class Machine:
                 )
                 if x
             ]
-        elif len(key) == 32:
+        elif len(key) == 40:
             self.key = key
             self.char_list = [
                 x
@@ -117,7 +117,7 @@ class Machine:
                 )
                 if x
             ]
-        elif len(key) == 36:
+        elif len(key) == 45:
             self.key = key
             self.char_list = [
                 x
@@ -132,16 +132,16 @@ class Machine:
             self.key = None
             self.char_list = None
             raise Exception(
-                "Invalid key type: must be string of 24, 32, or 36 digits."
+                "Invalid key type: must be string of 30, 40, or 45 digits."
             )
 
         if self.key is not None:
-            square = int(len(self.key) / 4)
+            square = int(len(self.key) / 5)
             try:
                 intkey = int(self.key)
             except:
                 raise Exception(
-                    "Invalid key type: must be string of 24, 32, or 36 digits."
+                    "Invalid key type: must be string of 30, 40, or 45 digits."
                 )
             finally:
                 key_x_elements = []
@@ -160,16 +160,21 @@ class Machine:
                     x2_key = np.argsort(np.array(key_x2_elements))
 
                 key_y2_elements = []
-                for i in self.key[(-1 * square) :]:
+                for i in self.key[(3 * square) : (4 * square)]:
                     key_y2_elements.append(int(i))
                     y2_key = np.argsort(np.array(key_y2_elements))
+                    
+                key_z_elements = []
+                for i in self.key[(-1 * square) :]:
+                    key_z_elements.append(int(i))
+                    z_key = np.argsort(np.array(key_z_elements))
 
         self.char_grid = np.asarray(self.char_list).reshape(
             square, square
         )
 
         reshuffle_1 = self.char_grid[:, x_key]
-        if len(self.key) == 32:
+        if len(self.key) == 40:
             reshuffle_2 = reshuffle_1.reshape(
                 4, int((square ** 2) / 4)
             ).transpose()
@@ -181,7 +186,7 @@ class Machine:
         reshuffle_4 = reshuffle_3[y_key, :]
 
         reshuffle_5 = reshuffle_4[:, x2_key]
-        if len(self.key) == 32:
+        if len(self.key) == 40:
             reshuffle_6 = reshuffle_5.reshape(
                 4, int((square ** 2) / 4)
             ).transpose()
@@ -191,8 +196,20 @@ class Machine:
             ).transpose()
         reshuffle_7 = reshuffle_6.reshape(square, square)
         reshuffle_8 = reshuffle_7[y2_key, :]
+        
+        reshuffle_9 = reshuffle_8[:, z_key]
+        if len(self.key) == 40:
+            reshuffle_10 = reshuffle_9.reshape(
+                4, int((square ** 2) / 4)
+            ).transpose()
+        else:
+            reshuffle_10 = reshuffle_9.reshape(
+                3, int((square ** 2) / 3)
+            ).transpose()
+        reshuffle_11 = reshuffle_10.reshape(square, square)
+        reshuffle_12 = reshuffle_11[z_key, :]        
 
-        self.scramble_grid = reshuffle_8
+        self.scramble_grid = reshuffle_12
 
     #     ----------
 
