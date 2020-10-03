@@ -25,8 +25,6 @@ Have a look at the demo [here](https://github.com/elbydata/pyfer/blob/master/dem
 ### Documentation
 
 Documentation is currently available in the form of docstrings.
-
- - TODO: publish full documentation
  
 ### Support
 
