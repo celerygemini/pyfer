@@ -29,7 +29,7 @@ Documentation is currently available in the form of docstrings.
 ### Support
 
 The source code is available [here](https://github.com/elbydata/pyfer/tree/master/pyfer).
-Please direct any queries to info@elbydata.com
+Please direct any queries to info@elbydata.com.
 
 ### License
 
