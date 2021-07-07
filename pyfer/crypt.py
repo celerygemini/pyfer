@@ -111,7 +111,9 @@ class Machine:
             self.char_list = [
                 x
                 for x in itertools.chain.from_iterable(
-                    itertools.zip_longest(lc_list, uc_list, d_list, p_med)
+                    itertools.zip_longest(
+                        lc_list, uc_list, d_list, p_med
+                    )
                 )
                 if x
             ]
@@ -120,14 +122,18 @@ class Machine:
             self.char_list = [
                 x
                 for x in itertools.chain.from_iterable(
-                    itertools.zip_longest(lc_list, uc_list, d_list, p_full)
+                    itertools.zip_longest(
+                        lc_list, uc_list, d_list, p_full
+                    )
                 )
                 if x
             ]
         else:
             self.key = None
             self.char_list = None
-            raise Exception("Invalid key type: must be string of 30, 40, or 45 digits.")
+            raise Exception(
+                "Invalid key type: must be string of 30, 40, or 45 digits."
+            )
 
         if self.key is not None:
             square = int(len(self.key) / 5)
@@ -163,29 +169,43 @@ class Machine:
                     key_z_elements.append(int(i))
                     z_key = np.argsort(np.array(key_z_elements))
 
-        self.char_grid = np.asarray(self.char_list).reshape(square, square)
+        self.char_grid = np.asarray(self.char_list).reshape(
+            square, square
+        )
 
         reshuffle_1 = self.char_grid[:, x_key]
         if len(self.key) == 40:
-            reshuffle_2 = reshuffle_1.reshape(4, int((square ** 2) / 4)).transpose()
+            reshuffle_2 = reshuffle_1.reshape(
+                4, int((square ** 2) / 4)
+            ).transpose()
         else:
-            reshuffle_2 = reshuffle_1.reshape(3, int((square ** 2) / 3)).transpose()
+            reshuffle_2 = reshuffle_1.reshape(
+                3, int((square ** 2) / 3)
+            ).transpose()
         reshuffle_3 = reshuffle_2.reshape(square, square)
         reshuffle_4 = reshuffle_3[y_key, :]
 
         reshuffle_5 = reshuffle_4[:, x2_key]
         if len(self.key) == 40:
-            reshuffle_6 = reshuffle_5.reshape(4, int((square ** 2) / 4)).transpose()
+            reshuffle_6 = reshuffle_5.reshape(
+                4, int((square ** 2) / 4)
+            ).transpose()
         else:
-            reshuffle_6 = reshuffle_5.reshape(3, int((square ** 2) / 3)).transpose()
+            reshuffle_6 = reshuffle_5.reshape(
+                3, int((square ** 2) / 3)
+            ).transpose()
         reshuffle_7 = reshuffle_6.reshape(square, square)
         reshuffle_8 = reshuffle_7[y2_key, :]
 
         reshuffle_9 = reshuffle_8[:, z_key]
         if len(self.key) == 40:
-            reshuffle_10 = reshuffle_9.reshape(4, int((square ** 2) / 4)).transpose()
+            reshuffle_10 = reshuffle_9.reshape(
+                4, int((square ** 2) / 4)
+            ).transpose()
         else:
-            reshuffle_10 = reshuffle_9.reshape(3, int((square ** 2) / 3)).transpose()
+            reshuffle_10 = reshuffle_9.reshape(
+                3, int((square ** 2) / 3)
+            ).transpose()
         reshuffle_11 = reshuffle_10.reshape(square, square)
         reshuffle_12 = reshuffle_11[z_key, :]
 
@@ -211,15 +231,21 @@ class Machine:
                     if all(i in self.char_list for i in input_string):
                         pass
                     else:
-                        raise Exception("Disallowed characters in input string")
+                        raise Exception(
+                            "Disallowed characters in input string"
+                        )
                 else:
-                    raise Exception("Input string must have length greater than 1.")
+                    raise Exception(
+                        "Input string must have length greater than 1."
+                    )
             else:
                 raise Exception(
                     f"Input string must have even number of characters; {len(input_string)} given."
                 )
         else:
-            raise Exception("Input must be string of even length greater than 1.")
+            raise Exception(
+                "Input must be string of even length greater than 1."
+            )
 
         in_indices = []
         for i in input_string:
@@ -230,7 +256,9 @@ class Machine:
 
         output_list = []
         for i in range(len(input_string)):
-            output_list.append(self.scramble_grid[out_indices[i][0], out_indices[i][1]])
+            output_list.append(
+                self.scramble_grid[out_indices[i][0], out_indices[i][1]]
+            )
         output_string = "".join(output_list)
 
         return output_string
@@ -255,15 +283,21 @@ class Machine:
                     if all(i in self.char_list for i in input_string):
                         pass
                     else:
-                        raise Exception("Disallowed characters in input string")
+                        raise Exception(
+                            "Disallowed characters in input string"
+                        )
                 else:
-                    raise Exception("Input string must have length greater than 1.")
+                    raise Exception(
+                        "Input string must have length greater than 1."
+                    )
             else:
                 raise Exception(
                     "Input string must have even number of characters and have length greater than 1."
                 )
         else:
-            raise Exception("Input must be string of even length greater than 1.")
+            raise Exception(
+                "Input must be string of even length greater than 1."
+            )
 
         in_indices = []
         for i in input_string:
@@ -274,7 +308,9 @@ class Machine:
 
         output_list = []
         for i in range(len(input_string)):
-            output_list.append(self.scramble_grid[out_indices[i][0], out_indices[i][1]])
+            output_list.append(
+                self.scramble_grid[out_indices[i][0], out_indices[i][1]]
+            )
         output_string = "".join(output_list)
 
         return output_string

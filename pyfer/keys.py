@@ -26,6 +26,8 @@ def generate_key(key_length):
             f"key_length argument must be an integer; {type(key_length)} given."
         )
 
-    str_key = "".join(["{}".format(np.random.randint(10)) for num in range(0, n)])
+    str_key = "".join(
+        ["{}".format(np.random.randint(10)) for num in range(0, n)]
+    )
 
     return str_key
