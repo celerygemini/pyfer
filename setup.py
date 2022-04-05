@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyfer",
-    version="4.0.3",
+    version="4.1.0",
     author="Elby Data",
     author_email="info@elbydata.com",
     description="Simple string encryption",

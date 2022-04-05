@@ -1,1 +1,1 @@
-from pyfer.pyfer import *
+from pyfer.pyfer import generate_key, Machine

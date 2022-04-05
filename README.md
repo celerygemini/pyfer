@@ -20,7 +20,18 @@ It's as easy as `pip install pyfer`!
 
 ### Quickstart
 
-Have a look at the demo [here](https://github.com/elbydata/pyfer/blob/master/demos/demo.ipynb)!
+```
+import pyfer
+
+k = pyfer.generate_key(45)
+m = "Hello_world!"
+pm = pyfer.Machine(k)
+
+pm.scramble(m)
+
+```
+
+For more information, have a look at the demo [here](https://github.com/elbydata/pyfer/blob/master/demos/demo.ipynb)!
 
 ### Documentation
 

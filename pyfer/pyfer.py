@@ -79,7 +79,7 @@ class Machine:
     unscramble: decrypts a message.
     """
 
-    def __init__(self, key):
+    def __init__(self, key, ws=False):
 
         """
         Constructs all the necessary attributes for the Crypt encryption
@@ -88,6 +88,11 @@ class Machine:
         Arguments:
             key (str): string of 30, 40, or 45 digits to serving as
             encryption key.
+            -
+            ws (bool) (optional): whether or not to include whitespace
+            in the message and in the character grid. If False, an
+            error will be raised if the message contains whitespace.
+            Defaults to False.
 
         Returns:
             Crypt encryption machine.
@@ -96,28 +101,54 @@ class Machine:
         lc_list = list(string.ascii_lowercase)
         uc_list = list(string.ascii_uppercase)
         d_list = list(string.digits)
-        p_med = ["!", "?"]
-        p_full = [
-            "!",
-            "?",
-            ".",
-            ",",
-            ":",
-            ";",
-            ")",
-            "(",
-            "_",
-            "+",
-            "-",
-            "=",
-            "<",
-            ">",
-            "%",
-            "*",
-            "/",
-            "$",
-            "&",
-        ]
+
+        if ws == True:
+            p_med = [" ", "?"]
+            p_full = [
+                "!",
+                "?",
+                ".",
+                ",",
+                ":",
+                ";",
+                ")",
+                "(",
+                "_",
+                "+",
+                "-",
+                "=",
+                "<",
+                ">",
+                "%",
+                "*",
+                "/",
+                " ",
+                "&",
+            ]
+
+        else:
+            p_med = ["!", "?"]
+            p_full = [
+                "!",
+                "?",
+                ".",
+                ",",
+                ":",
+                ";",
+                ")",
+                "(",
+                "_",
+                "+",
+                "-",
+                "=",
+                "<",
+                ">",
+                "%",
+                "*",
+                "/",
+                "$",
+                "&",
+            ]
 
         if type(key) is str:
             pass
@@ -266,9 +297,7 @@ class Machine:
                         "Input string must have length greater than 1."
                     )
             else:
-                raise Exception(
-                    f"Input string must have even number of characters; {len(input_string)} given."
-                )
+                input_string = input_string + "00000"
         else:
             raise Exception(
                 "Input must be string of even length greater than 1."
@@ -318,9 +347,7 @@ class Machine:
                         "Input string must have length greater than 1."
                     )
             else:
-                raise Exception(
-                    "Input string must have even number of characters and have length greater than 1."
-                )
+                input_string = input_string + "00000"
         else:
             raise Exception(
                 "Input must be string of even length greater than 1."
