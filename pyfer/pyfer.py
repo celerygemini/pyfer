@@ -27,7 +27,6 @@ import itertools
 
 
 def generate_key(key_length):
-
     """
     Generates a random string of digits of the specified length.
     """
@@ -80,7 +79,6 @@ class Machine:
     """
 
     def __init__(self, key, ws=False):
-
         """
         Constructs all the necessary attributes for the Crypt encryption
         machine.
@@ -169,9 +167,7 @@ class Machine:
             self.char_list = [
                 x
                 for x in itertools.chain.from_iterable(
-                    itertools.zip_longest(
-                        lc_list, uc_list, d_list, p_med
-                    )
+                    itertools.zip_longest(lc_list, uc_list, d_list, p_med)
                 )
                 if x
             ]
@@ -180,9 +176,7 @@ class Machine:
             self.char_list = [
                 x
                 for x in itertools.chain.from_iterable(
-                    itertools.zip_longest(
-                        lc_list, uc_list, d_list, p_full
-                    )
+                    itertools.zip_longest(lc_list, uc_list, d_list, p_full)
                 )
                 if x
             ]
@@ -227,18 +221,16 @@ class Machine:
                     key_z_elements.append(int(i))
                     z_key = np.argsort(np.array(key_z_elements))
 
-        self.char_grid = np.asarray(self.char_list).reshape(
-            square, square
-        )
+        self.char_grid = np.asarray(self.char_list).reshape(square, square)
 
         reshuffle_1 = self.char_grid[:, x_key]
         if len(self.key) == 40:
             reshuffle_2 = reshuffle_1.reshape(
-                4, int((square ** 2) / 4)
+                4, int((square**2) / 4)
             ).transpose()
         else:
             reshuffle_2 = reshuffle_1.reshape(
-                3, int((square ** 2) / 3)
+                3, int((square**2) / 3)
             ).transpose()
         reshuffle_3 = reshuffle_2.reshape(square, square)
         reshuffle_4 = reshuffle_3[y_key, :]
@@ -246,11 +238,11 @@ class Machine:
         reshuffle_5 = reshuffle_4[:, x2_key]
         if len(self.key) == 40:
             reshuffle_6 = reshuffle_5.reshape(
-                4, int((square ** 2) / 4)
+                4, int((square**2) / 4)
             ).transpose()
         else:
             reshuffle_6 = reshuffle_5.reshape(
-                3, int((square ** 2) / 3)
+                3, int((square**2) / 3)
             ).transpose()
         reshuffle_7 = reshuffle_6.reshape(square, square)
         reshuffle_8 = reshuffle_7[y2_key, :]
@@ -258,11 +250,11 @@ class Machine:
         reshuffle_9 = reshuffle_8[:, z_key]
         if len(self.key) == 40:
             reshuffle_10 = reshuffle_9.reshape(
-                4, int((square ** 2) / 4)
+                4, int((square**2) / 4)
             ).transpose()
         else:
             reshuffle_10 = reshuffle_9.reshape(
-                3, int((square ** 2) / 3)
+                3, int((square**2) / 3)
             ).transpose()
         reshuffle_11 = reshuffle_10.reshape(square, square)
         reshuffle_12 = reshuffle_11[z_key, :]
@@ -272,7 +264,6 @@ class Machine:
     #     ----------
 
     def scramble(self, input_string):
-
         """
         Scramble the input message using the Crypt Machine.
 
@@ -289,9 +280,7 @@ class Machine:
                     if all(i in self.char_list for i in input_string):
                         pass
                     else:
-                        raise Exception(
-                            "Disallowed characters in input string"
-                        )
+                        raise Exception("Disallowed characters in input string")
                 else:
                     raise Exception(
                         "Input string must have length greater than 1."
@@ -322,7 +311,6 @@ class Machine:
     #     ----------
 
     def unscramble(self, input_string):
-
         """
         Unscramble the input message using the Crypt Machine.
 
@@ -339,9 +327,7 @@ class Machine:
                     if all(i in self.char_list for i in input_string):
                         pass
                     else:
-                        raise Exception(
-                            "Disallowed characters in input string"
-                        )
+                        raise Exception("Disallowed characters in input string")
                 else:
                     raise Exception(
                         "Input string must have length greater than 1."
