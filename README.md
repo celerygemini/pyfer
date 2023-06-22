@@ -26,21 +26,24 @@ Install it from **PyPI** by running `pip install pyfer`.
 
 ### Dependencies 
 
-The only dependency is [NumPy](https://numpy.org)
+The only dependency is [NumPy](https://numpy.org).
 
 ## 🚀 Execution
 
-### Quickstart
+### App
 
+If running in a virtual environment using `pyenv`/`virtualenv`, ensure the Python version is configured for `tkinter` by following the instructions [here](https://github.com/celerygemini/resources/blob/main/pyenv_tkinter.md).
+
+To run the app, simply open a terminal window to the project folder and run:
 ```
-import pyfer
+python app.py
+```
 
-k = pyfer.generate_key(45)
-m = "Hello_world!"
-pm = pyfer.Machine(k)
+### Command Line
 
-pm.scramble(m)
-
+Alternatively, Pyfer can be run from the command line:
+```
+python main.py <key> <input_string>
 ```
 
 For more information, have a look at the demo [here](https://github.com/elbydata/pyfer/blob/master/demos/demo.ipynb)!
